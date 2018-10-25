@@ -200,10 +200,13 @@ unzip newrelic.zip -d /deployments && cd /deployments/newrelic
 
 #modify config file with license key
 echo "Updating New Relic configuration file..."
+echo "NEWRELIC_LICENSE: ${NEWRELIC_LICENSE}"
+echo "NEWRELIC_APPNAME: ${NEWRELIC_APPNAME}"
 sed -Ei "s/license_key: (.*)/license_key: '${NEWRELIC_LICENSE}'/g" newrelic.yml
 sed -Ei "s/app_name: (.*)/app_name: ${NEWRELIC_APPNAME}/g" newrelic.yml
 
-echo "New Relic agent install complete"
+
+echo "New Relic agent install complete $?"
 
 # Remove java tmp perf data dir owned by 185
 rm -rf /tmp/hsperfdata_jboss
