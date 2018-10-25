@@ -200,8 +200,8 @@ unzip newrelic.zip -d /deployments && cd /deployments/newrelic
 
 #modify config file with license key
 echo "Updating New Relic configuration file..."
-sed -ie "s/<%= license_key %>/${NEWRELIC_LICENSE}/g" newrelic.yml
-sed -ie "s/My Application/${NEWRELIC_APPNAME}/g" newrelic.yml
+sed -Ei "s/license_key: (.*)/license_key: '${NEWRELIC_LICENSE}'/g" newrelic.yml
+sed -Ei "s/app_name: (.*)/app_name: ${NEWRELIC_APPNAME}/g" newrelic.yml
 
 echo "New Relic agent install complete"
 
