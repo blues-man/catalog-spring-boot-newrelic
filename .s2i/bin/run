@@ -8,9 +8,9 @@ source /usr/local/s2i/s2i-setup
 
 # Always include jolokia-opts, which can be empty if switched off via env
 export JAVA_OPTIONS="${JAVA_OPTIONS:+${JAVA_OPTIONS} }$(/opt/jolokia/jolokia-opts) $(source /opt/hawkular/hawkular-opts && get_hawkular_opts)"
-export JAVA_OPTIONS="${JAVA_OPTIONS: -javaagent:/deployments/newrelic/newrelic.jar}"
+export JAVA_OPTIONS="$JAVA_OPTIONS -javaagent:/deployments/newrelic/newrelic.jar"
 if [ -f "${DEPLOYMENTS_DIR}/bin/run.sh" ]; then
-    echo "Starting the application using the bundled ${DEPLOYMENTS_DIR}/bin/run.sh ..."
+-javaagent:/opt/app-root/src/newrelic/newrelic.jar    echo "Starting the application using the bundled ${DEPLOYMENTS_DIR}/bin/run.sh ..."
     exec ${DEPLOYMENTS_DIR}/bin/run.sh $args ${JAVA_ARGS}
 else
     echo "Starting the Java application using /opt/run-java/run-java.sh ..."
